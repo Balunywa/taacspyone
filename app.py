@@ -5,9 +5,9 @@ app = Flask(__name__)
 def index():
     return '<h1>This is the default page!</h1>'
 
-@app.route('/twomsprod')
+@app.route('/onemsdev')
 def info():
-    return '<h1>This is a PROD ACA Environment!</h1>'
+    return '<h1>This is the DEV ACA Environment!</h1>'
 
 if __name__ == '__main__':
     app.run()
