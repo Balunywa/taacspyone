@@ -7,7 +7,7 @@ trigger:
 - master
 
 pool:
-  vmImage: ci-cd-vms000002
+  vmImage: vmss-one
 strategy:
   matrix:
     Python27:
