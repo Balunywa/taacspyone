@@ -7,8 +7,7 @@
 trigger:
 - master
 
-pool:
-  vmImage: vmss-one
+pool: vmss-one
 strategy:
   matrix:
     Python27:
