@@ -11,7 +11,7 @@ pool: vmss-one
 strategy:
   matrix:
     Python37:
-      python.version: '3.7'
+      python.version: '2.7.18'
 
 steps:
 - task: UsePythonVersion@0
