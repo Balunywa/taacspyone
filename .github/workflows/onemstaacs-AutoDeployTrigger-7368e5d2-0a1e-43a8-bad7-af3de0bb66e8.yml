@@ -1,0 +1,60 @@
+name: Trigger auto deployment for onemstaacs
+
+# When this action will be executed
+on:
+  # Automatically trigger it when detected changes in repo
+  push:
+    branches: 
+      [ master ]
+    paths:
+    - '**'
+    - '.github/workflows/onemstaacs-AutoDeployTrigger-7368e5d2-0a1e-43a8-bad7-af3de0bb66e8.yml'
+
+  # Allow mannually trigger 
+  workflow_dispatch:      
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout to the branch
+        uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Log in to container registry
+        uses: docker/login-action@v1
+        with:
+          registry: acams.azurecr.io
+          username: ${{ secrets.ONEMSTAACS_REGISTRY_USERNAME }}
+          password: ${{ secrets.ONEMSTAACS_REGISTRY_PASSWORD }}
+
+      - name: Build and push container image to registry
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: acams.azurecr.io/onemstaacs:${{ github.sha }}
+          file: ./Dockerfile
+          context: ./
+
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    
+    steps:
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.ONEMSTAACS_AZURE_CREDENTIALS }}
+
+
+      - name: Deploy to containerapp
+        uses: azure/CLI@v1
+        with:
+          inlineScript: |
+            az config set extension.use_dynamic_install=yes_without_prompt
+            az containerapp registry set -n onemstaacs -g premier-static-web-app-lab_group --server acams.azurecr.io --username  ${{ secrets.ONEMSTAACS_REGISTRY_USERNAME }} --password ${{ secrets.ONEMSTAACS_REGISTRY_PASSWORD }}
+            az containerapp update -n onemstaacs -g premier-static-web-app-lab_group --image acams.azurecr.io/onemstaacs:${{ github.sha }}
