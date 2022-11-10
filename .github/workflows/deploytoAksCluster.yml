@@ -44,6 +44,7 @@ jobs:
         manifests: |
           manifests/deployment.yml
           manifests/service.yml
+          manifests/Ingress-taacspyone.yml
         images: |
           acams.azurecr.io/akscn01:${{ github.sha }}
         imagepullsecrets: |
