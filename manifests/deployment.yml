@@ -16,4 +16,4 @@ spec:
         - name: "akscn01-bdef"
           image: "acams.azurecr.io/akscn01"
           ports:
-          - containerPort: 80
+          - containerPort: 5000
