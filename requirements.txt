@@ -31,7 +31,6 @@ jupyter_core==5.2.0
 Mako==1.2.4
 MarkupSafe==2.1.1
 matplotlib-inline==0.1.6
-momoapi
 msrest==0.7.1
 nest-asyncio==1.5.6
 oauthlib==3.2.2
