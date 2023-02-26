@@ -1,5 +1,3 @@
-from momoapi.client import MomoApi
-from momoapi.errors import APIError
 import os
 import urllib.parse
 import requests
@@ -83,7 +81,6 @@ def contributions():
     return render_template('index.html', table=table)
 
 if __name__ == '__main__':
-   app.run(debug=True)
-
+   app.run(debug=True, port=5000)
 
 
