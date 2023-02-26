@@ -116,18 +116,20 @@ h1 {
   <body>
     <h1>Gift Circles</h1>
     <h1>The Joy of Giving</h1>
-    <form method="POST">
+    <form method="POST" action="{{ url_for('contributions') }}">
       <label for="name">Name</label>
       <input type="text" name="name" id="name"><br>
       <label for="msisdn">MTN or Airtel Number</label>
       <input type="text" name="msisdn" id="msisdn"><br>
       <label for="amount">Amount</label>
       <input type="text" name="amount" id="amount"><br>
+      <br>
       <input type="submit" value="Contribute">
     </form>
     <h1>Contributions</h1>
     {{ table|safe }}
   </body>
+
 </html>
 
 
