@@ -60,4 +60,4 @@ jobs:
         with:
           app-name: 'onetaacs'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_EA467ED3AC91425582FFAB7935D74E21 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_7597A86E58DF4E129E9290D539E83A9B }}
